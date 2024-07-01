@@ -27,9 +27,9 @@ const Portfolio = () => {
     console.log("Projects:", projects);
 
     return (
-        <>
+        <div data-aos="fade-up">
 
-            <div className="portfolio" id="portfolio">
+            <div className="portfolio" id="portfolio" >
                 <span>Recent Projects</span>
                 <span>Portfolio</span>
             </div>
@@ -66,7 +66,7 @@ const Portfolio = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-        </>);
+        </div>);
 };
 
 export default Portfolio;

@@ -6,7 +6,8 @@ const Experience = () => {
     const darkMode = theme.state.darkMode;
 
     return (
-        <div className="experience" id='experience'>
+        <div className="experience" id='experience' data-aos="zoom-in-right"
+            data-aos-anchor-placement="top-bottom">
             <div className="achievement">
 
                 <div className="circle" style={{ color: darkMode ? 'var(--orange)' : '' }}>1+</div>

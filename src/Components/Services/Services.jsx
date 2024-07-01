@@ -20,7 +20,7 @@ const Services = () => {
     };
 
     return (
-        <div className="services" id="services">
+        <div className="services" id="services" data-aos="zoom-in">
             {/* left side */}
             <div className="awesome">
                 {/* dark mode */}

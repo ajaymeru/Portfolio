@@ -41,7 +41,7 @@ const Intro = () => {
     }, []);
 
     return (
-        <div className="Intro" id="Intro">
+        <div className="Intro" id="Intro" data-aos="fade-up">
             <div className="i-left">
                 <div className="i-name">
                     <span style={{ color: darkMode ? "white" : "" }}>Hy! I Am</span>
