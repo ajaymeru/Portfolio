@@ -1,46 +1,72 @@
-import React, { useContext } from "react";
-import "./Portfolio.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import Sidebar from "../../img/sidebar.png";
-import Ecommerce from "../../img/ecommerce.png";
-import HOC from "../../img/hoc.png";
-import MusicApp from "../../img/musicapp.png";
-import { themeContext } from "../../Context";
+import React from 'react';
+import './Portfolio.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules';
+
+import NFT from "../../img/nft.png";
+import Weather from "../../img/weather.png";
+import Elearning from "../../img/elearning.png";
+import Bookstore from "../../img/bookstore.png";
+import Cowork from "../../img/cowork.png";
+import Galaxy from "../../img/galay.png";
 
 const Portfolio = () => {
-    const theme = useContext(themeContext);
-    const darkMode = theme.state.darkMode;
+    const projects = [
+        { src: Galaxy, link: 'https://travel-galaxy-by-ajay.netlify.app/', text: 'Click to see my project' },
+        { src: NFT, link: 'https://ajay-nft.netlify.app/', text: 'Click to see my project' },
+        { src: Weather, link: 'https://ajaymeru-weather-app.netlify.app/', text: 'Click to see my project' },
+        { src: Elearning, link: 'https://frabjous-bienenstitch-9c1be5.netlify.app/', text: 'Click to see my project' },
+        { src: Bookstore, link: 'https://boisterous-tulumba-bb607c.netlify.app/', text: 'Click to see my project' },
+        { src: Cowork, link: 'https://jay-co-working.netlify.app/', text: 'Click to see my project' },
+    ];
 
-    // Determine slides per view based on screen width
-    const slidesPerView = window.innerWidth >= 768 ? 2 : 1;
+    console.log("Projects:", projects);
 
     return (
-        <div className="portfolio" id="portfolio">
-            <span style={{ color: darkMode ? 'white' : '' }}>Recent Projects</span>
-            <span>Portfolio</span>
+        <>
 
+            <div className="portfolio" id="portfolio">
+                <span>Recent Projects</span>
+                <span>Portfolio</span>
+            </div>
             <Swiper
                 spaceBetween={30}
-                slidesPerView={slidesPerView}
-                grabCursor={true}
-                className="portfolio-slider"
+                slidesPerView={1}
+                navigation
+                pagination={{ clickable: true }}
+                modules={[Navigation, Pagination, A11y, Autoplay]}
+                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                breakpoints={{
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 40,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 50,
+                    },
+                }}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
             >
-                <SwiperSlide>
-                    <img src={Sidebar} alt="Sidebar Project" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={Ecommerce} alt="Ecommerce Project" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={MusicApp} alt="Music App Project" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src={HOC} alt="HOC Project" />
-                </SwiperSlide>
+                {projects.map((project, index) => (
+                    <SwiperSlide key={index}>
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            <img src={project.src} alt={`Slide ${index + 1}`} />
+                            <div className="slide-text">{project.text}</div>
+                        </a>
+                    </SwiperSlide>
+                ))}
             </Swiper>
-        </div>
-    );
+        </>);
 };
 
 export default Portfolio;
