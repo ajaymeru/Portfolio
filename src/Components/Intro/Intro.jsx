@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "./Intro.css";
 import Vector1 from "../../img/Vector1.png";
 import Vector2 from "../../img/Vector2.png";
@@ -13,22 +13,42 @@ import Instagram from "../../img/instagram.png";
 import { themeContext } from "../../Context";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
-const Intro = () => {
+import Typed from "typed.js";
 
+const Intro = () => {
     const transition = { duration: 2, type: "spring" };
 
     const theme = useContext(themeContext);
     const darkMode = theme.state.darkMode;
+
+    // Reference to store the DOM element for Typed.js
+    const el = useRef(null);
+
+    useEffect(() => {
+        const typed = new Typed(el.current, {
+            strings: ["PATLURI AJAY", "frontend web developer"],
+            typeSpeed: 50,
+            backSpeed: 50,
+            backDelay: 1000,
+            loop: true,
+            showCursor: false,
+        });
+
+        // Destroy Typed instance during cleanup to stop animation
+        return () => {
+            typed.destroy();
+        };
+    }, []);
 
     return (
         <div className="Intro" id="Intro">
             <div className="i-left">
                 <div className="i-name">
                     <span style={{ color: darkMode ? "white" : "" }}>Hy! I Am</span>
-                    <span>PATLURI AJAY</span>
+                    <span ref={el}></span>
                     <span>
                         Frontend Developer with high level of experience in web designing
-                        and development, producting the Quality work
+                        and development, producing quality work.
                     </span>
                 </div>
                 <Link to="contact" smooth={true} spy={true}>
@@ -51,7 +71,6 @@ const Intro = () => {
                     src={glassesimoji}
                     alt=""
                 />
-
                 <motion.div
                     initial={{ top: "-4%", left: "74%" }}
                     whileInView={{ left: "68%" }}
@@ -60,7 +79,6 @@ const Intro = () => {
                 >
                     <FloatinDiv img={crown} text1="Web" text2="Developer" />
                 </motion.div>
-
                 <motion.div
                     initial={{ left: "9rem", top: "18rem" }}
                     whileInView={{ left: "0rem" }}
@@ -69,7 +87,6 @@ const Intro = () => {
                 >
                     <FloatinDiv img={thumbup} text1="Best Design" text2="Award" />
                 </motion.div>
-
                 <div className="blur" style={{ background: "rgb(238 210 255)" }}></div>
                 <div
                     className="blur"
